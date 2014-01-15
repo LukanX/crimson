@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     @intervals ||= periods.map(&:period_interval).compact
   end
 
+  def average_interval
+    intervals.average
+  end
+
   def interval_std_dev
     intervals.standard_deviation.round(2)
   end
