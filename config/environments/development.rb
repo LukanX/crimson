@@ -26,4 +26,7 @@ Crimson::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Mailer for Devise - Make sure to change this to final host in production
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
