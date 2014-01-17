@@ -4,12 +4,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  before_save { |user| user.email = email.downcase }
+
   has_many :periods, dependent: :destroy
   accepts_nested_attributes_for :periods
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX } 
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, 
+      uniqueness: { case_sensitive: false }
   validates :name, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, :on => :save
+  validates :password_confirmation, presence: true, :on => :save
 
   def durations
     @durations ||= periods.map(&:duration).compact
