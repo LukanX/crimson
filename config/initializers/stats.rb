@@ -22,5 +22,13 @@ module Enumerable
   def standard_deviation
     return Math.sqrt(self.sample_variance)
   end
+
+  # median of an array of numbers
+  def median
+    sorted = self.sort
+    len = sorted.length
+    return (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+  end
+
  
 end  #  module Enumerable

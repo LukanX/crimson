@@ -6,6 +6,6 @@ class UsersController < ApplicationController
   # list between create and update. Also, you can specialize this method
   # with per-user checking of permissible attributes.
   def user_params
-    params.require(:user).permit(:name, :email period_attributes:[:start_date, :end_date, :user_id])
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, period_attributes:[:start_date, :end_date, :user_id])
   end
 end

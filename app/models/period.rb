@@ -9,7 +9,7 @@ class Period < ActiveRecord::Base
 
   def period_interval
     unless next_period.nil?
-    next_period.start_date.mjd - end_date.mjd
+    next_period.start_date.mjd - start_date.mjd
     end
   end
 
