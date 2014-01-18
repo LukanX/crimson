@@ -8,4 +8,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, period_attributes:[:start_date, :end_date, :user_id])
   end
+
+  def show
+    @user = current_user
+    @periods = @user.periods.all
+  end
+
+  def index
+    @users = User.all
+  end
 end

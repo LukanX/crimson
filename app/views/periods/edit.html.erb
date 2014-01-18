@@ -1,0 +1,10 @@
+<h2>Update Period</h2>
+
+<%= form_for [current_user, @period] do |f| %>
+  
+  <%= render 'fields', f: f %>
+
+  <div><%= f.submit "Update Period" %></div>
+
+<% end %>
+

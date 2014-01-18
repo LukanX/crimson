@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, :on => :save
 
   def durations
-    @durations ||= periods.map(&:duration).compact
+    @durations ||= periods.map(&:duration).compact.insert_values(4)
   end
 
   def average_duration
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def intervals
-    @intervals ||= periods.map(&:period_interval).compact
+    @intervals ||= periods.map(&:period_interval).compact.insert_values(28)
   end
 
   def average_interval
@@ -38,6 +38,22 @@ class User < ActiveRecord::Base
 
   def interval_std_dev
     intervals.standard_deviation.round(2)
+  end
+
+  def last_period
+    unless self.periods.empty?
+      @last_period ||= self.periods.last
+    else
+      @last_period ||= nil
+    end
+  end
+
+  def last_period_start
+    @last_period_start ||= last_period.start_date
+  end
+
+  def period_prediction
+    @period_prediction = last_period_start + average_interval
   end
 
 

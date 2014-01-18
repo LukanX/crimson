@@ -30,5 +30,13 @@ module Enumerable
     return (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
   end
 
+  #Inject an array until there are 3 entries
+  def insert_values(x)
+    until self.length > 2
+      self.push(x)
+    end
+    return self
+  end
+
  
 end  #  module Enumerable

@@ -1,6 +1,7 @@
 class Period < ActiveRecord::Base
   belongs_to :user
   validates :user_id, presence: true
+  validates :start_date, presence: true
   require 'date'
 
   def next_period
